@@ -1,4 +1,4 @@
-function convertOpenApiToInterface(openApiTx) {
+function convertOpenapiToInterface(openapiTx) {
     const tx = {}; //: ITransaction = {}
 
     const mapping = {
@@ -9,7 +9,7 @@ function convertOpenApiToInterface(openApiTx) {
         burnTransactionHash: "txBurnHash",
     };
 
-    Object.entries(openApiTx).map(([key, value]) => {
+    Object.entries(openapiTx).map(([key, value]) => {
         if (key in mapping) {
             tx[mapping[key]] = value;
         } else {
@@ -69,7 +69,7 @@ function convertInterfaceToWatchgod(watchgodTx) {
 }
 
 module.exports = {
-    convertOpenApiToInterface,
+    convertOpenapiToInterface,
     convertWatchgodToInterface,
     convertInterfaceToWatchgod,
 };
