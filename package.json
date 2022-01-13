@@ -1,0 +1,25 @@
+{
+  "name": "openapi-watchgod-merger",
+  "version": "1.0.0",
+  "description": "merge open api and watchgod responses to get latest transaction status",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankitboghra/openapi-watchgod-merger.git"
+  },
+  "keywords": [
+    "openapi",
+    "watchgod",
+    "polygon",
+    "web3"
+  ],
+  "author": "Ankit Boghra <ankitboghra@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ankitboghra/openapi-watchgod-merger/issues"
+  },
+  "homepage": "https://github.com/ankitboghra/openapi-watchgod-merger#readme"
+}
