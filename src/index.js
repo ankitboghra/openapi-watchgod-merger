@@ -5,7 +5,7 @@ const {
     openApiWithdrawResponse,
     openApiBurnResponse,
     watchGodResponse,
-} = require("./responseData");
+} = require("../responseData");
 
 const mergedData = merger(
     openApiDepositResponse,
