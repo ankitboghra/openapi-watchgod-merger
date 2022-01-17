@@ -1,4 +1,4 @@
-function mergeWithdraws(
+export default function mergeWithdraws(
     openapiExits,
     openapiBurns,
     watchgodExits,
@@ -102,8 +102,4 @@ function mergeWithdraws(
     });
 
     return Object.values(mergedWithdraws);
-}
-
-module.exports = {
-    mergeWithdraws
 }

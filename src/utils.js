@@ -1,4 +1,4 @@
-function convertOpenapiToInterface(openapiTx) {
+export function convertOpenapiToInterface(openapiTx) {
     const tx = {}; //: ITransaction = {}
 
     const mapping = {
@@ -26,7 +26,7 @@ function convertOpenapiToInterface(openapiTx) {
     return tx;
 }
 
-function convertWatchgodToInterface(watchgodTx) {
+export function convertWatchgodToInterface(watchgodTx) {
     const tx = {}; //: ITransaction = {}
 
     const mapping = {
@@ -47,7 +47,7 @@ function convertWatchgodToInterface(watchgodTx) {
     return tx;
 }
 
-function convertInterfaceToWatchgod(watchgodTx) {
+export function convertInterfaceToWatchgod(watchgodTx) {
     const tx = {}; //: ITransaction = {}
 
     const mapping = {
@@ -67,9 +67,3 @@ function convertInterfaceToWatchgod(watchgodTx) {
 
     return tx;
 }
-
-module.exports = {
-    convertOpenapiToInterface,
-    convertWatchgodToInterface,
-    convertInterfaceToWatchgod,
-};

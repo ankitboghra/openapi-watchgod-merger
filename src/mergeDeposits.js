@@ -1,6 +1,6 @@
-function mergeDeposits(openapiDeposits, watchgodDeposits) {
-    const mergedDeposits = {};
+export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
 
+    const mergedDeposits = {};
     watchgodDeposits.forEach((tx) => {
         const txHash = tx.txHash;
         mergedDeposits[txHash] = tx;
@@ -27,8 +27,4 @@ function mergeDeposits(openapiDeposits, watchgodDeposits) {
     });
 
     return Object.values(mergedDeposits);
-}
-
-module.exports = {
-    mergeDeposits
 }

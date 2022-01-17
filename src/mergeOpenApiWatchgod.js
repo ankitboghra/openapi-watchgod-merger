@@ -46,14 +46,14 @@ interface ITransaction {
 }
 */
 
-const {
+import {
     convertOpenapiToInterface,
     convertWatchgodToInterface,
     convertInterfaceToWatchgod,
-} = require("./utils");
+} from "./utils";
 
-const { mergeDeposits } = require('./mergeDeposits')
-const { mergeWithdraws } = require('./mergeWithdraws')
+import mergeDeposits from './mergeDeposits'
+import mergeWithdraws from './mergeWithdraws'
 
 /**
  *
@@ -62,7 +62,7 @@ const { mergeWithdraws } = require('./mergeWithdraws')
  * @param {*} openapiBurnResponse
  * @param {*} watchGodResponse
  */
-function merger(
+export default function merger(
     openapiDepositResponse,
     openapiWithdrawResponse,
     openapiBurnResponse,
@@ -97,5 +97,3 @@ function merger(
         ...mergeWithdraws(openapiExits, openapiBurns, watchgodExits, watchgodBurns),
     ];
 }
-
-module.exports = merger;
