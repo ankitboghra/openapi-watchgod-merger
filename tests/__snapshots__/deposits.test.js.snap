@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`openapi and watchgod 1`] = `
+Object {
+  "_latestStatus": "deposited",
+  "_openapiTxStatus": "deposited",
+  "_txSource": "openapi_deposits",
+  "_watchgodTxStatus": "confirmed",
+  "amount": "100000000000000000000",
+  "amounts": null,
+  "blockNumber": null,
+  "from": "0xdepositer_1",
+  "id": "id_1",
+  "isPoS": null,
+  "rootToken": "0xrootToken_1",
+  "rootTunnelAddress": "0xrootTunnelAddress_1",
+  "timestamp": 1639662463,
+  "tokenId": null,
+  "tokenIds": null,
+  "tokenType": "tokenType_1",
+  "txHash": "0xtxHash_1",
+  "txStatus": "deposited",
+  "userAddress": "0xuserAddress_1",
+}
+`;
+
+exports[`openapi and watchgod 2`] = `
+Object {
+  "_latestStatus": "deposited",
+  "_openapiTxStatus": "deposited",
+  "_txSource": "openapi_deposits",
+  "_watchgodTxStatus": "confirmed",
+  "amount": "100000000000000000000",
+  "amounts": null,
+  "blockNumber": null,
+  "from": "0xdepositer_1",
+  "id": "id_1",
+  "isPoS": null,
+  "rootToken": "0xrootToken_1",
+  "rootTunnelAddress": "0xrootTunnelAddress_1",
+  "timestamp": 1639662463,
+  "tokenId": null,
+  "tokenIds": null,
+  "tokenType": "tokenType_1",
+  "txHash": "0xtxHash_1",
+  "txStatus": "deposited",
+  "userAddress": "0xuserAddress_1",
+}
+`;
+
+exports[`openapi and watchgod 3`] = `
+Object {
+  "_latestStatus": "deposited",
+  "_openapiTxStatus": "deposited",
+  "_txSource": "openapi_deposits",
+  "_watchgodTxStatus": "confirmed",
+  "amount": "100000000000000000000",
+  "amounts": null,
+  "blockNumber": null,
+  "from": "0xdepositer_2",
+  "id": "id_2",
+  "isPoS": null,
+  "rootToken": "0xrootToken_2",
+  "rootTunnelAddress": "0xrootTunnelAddress_2",
+  "timestamp": 1639662463,
+  "tokenId": null,
+  "tokenIds": null,
+  "tokenType": "tokenType_2",
+  "txHash": "0xtxHash_2",
+  "txStatus": "deposited",
+  "userAddress": "0xuserAddress_2",
+}
+`;
+
+exports[`openapi deposit only 1`] = `
+Object {
+  "_latestStatus": "deposited",
+  "_openapiTxStatus": "deposited",
+  "_txSource": "openapi_deposits",
+  "amount": "100000000000000000000",
+  "amounts": null,
+  "blockNumber": null,
+  "from": "0xdepositer_1",
+  "id": "id_1",
+  "isPoS": null,
+  "rootToken": "0xrootToken_1",
+  "rootTunnelAddress": "0xrootTunnelAddress_1",
+  "timestamp": 1639662463,
+  "tokenId": null,
+  "tokenIds": null,
+  "tokenType": "tokenType_1",
+  "txHash": "0xtxHash_1",
+  "txStatus": "deposited",
+  "userAddress": "0xuserAddress_1",
+}
+`;
+
+exports[`openapi deposits only 1`] = `
+Object {
+  "_latestStatus": "deposited",
+  "_openapiTxStatus": "deposited",
+  "_txSource": "openapi_deposits",
+  "amount": "100000000000000000000",
+  "amounts": null,
+  "blockNumber": null,
+  "from": "0xdepositer_1",
+  "id": "id_1",
+  "isPoS": null,
+  "rootToken": "0xrootToken_1",
+  "rootTunnelAddress": "0xrootTunnelAddress_1",
+  "timestamp": 1639662463,
+  "tokenId": null,
+  "tokenIds": null,
+  "tokenType": "tokenType_1",
+  "txHash": "0xtxHash_1",
+  "txStatus": "deposited",
+  "userAddress": "0xuserAddress_1",
+}
+`;
+
+exports[`openapi deposits only 2`] = `
+Object {
+  "_latestStatus": "deposited",
+  "_openapiTxStatus": "deposited",
+  "_txSource": "openapi_deposits",
+  "amount": "100000000000000000000",
+  "amounts": null,
+  "blockNumber": null,
+  "from": "0xdepositer_2",
+  "id": "id_2",
+  "isPoS": null,
+  "rootToken": "0xrootToken_2",
+  "rootTunnelAddress": "0xrootTunnelAddress_2",
+  "timestamp": 1639662463,
+  "tokenId": null,
+  "tokenIds": null,
+  "tokenType": "tokenType_2",
+  "txHash": "0xtxHash_2",
+  "txStatus": "deposited",
+  "userAddress": "0xuserAddress_2",
+}
+`;
+
+exports[`watchgod deposit only 1`] = `
+Object {
+  "_latestStatus": "confirmed",
+  "_txSource": "watchgod_deposits",
+  "_watchgodTxStatus": "confirmed",
+  "amount": "100000000000000000000",
+  "blockNumber": 13816531,
+  "data": "0xdata_1",
+  "from": "0xfrom_1",
+  "network": "main",
+  "rootToken": "0xrootToken_1",
+  "timestamp": 1639662471018,
+  "to": "0xto_1",
+  "txBurnHash": null,
+  "txHash": "0xtxHash_1",
+  "txStatus": "confirmed",
+  "txType": "deposit",
+}
+`;
+
+exports[`watchgod deposits only 1`] = `
+Object {
+  "_latestStatus": "confirmed",
+  "_txSource": "watchgod_deposits",
+  "_watchgodTxStatus": "confirmed",
+  "amount": "100000000000000000000",
+  "blockNumber": 13816531,
+  "data": "0xdata_1",
+  "from": "0xfrom_1",
+  "network": "main",
+  "rootToken": "0xrootToken_1",
+  "timestamp": 1639662471018,
+  "to": "0xto_1",
+  "txBurnHash": null,
+  "txHash": "0xtxHash_1",
+  "txStatus": "confirmed",
+  "txType": "deposit",
+}
+`;
+
+exports[`watchgod deposits only 2`] = `
+Object {
+  "_latestStatus": "confirmed",
+  "_txSource": "watchgod_deposits",
+  "_watchgodTxStatus": "confirmed",
+  "amount": "100000000000000000000",
+  "blockNumber": 13816531,
+  "data": "0xdata_2",
+  "from": "0xfrom_2",
+  "network": "main",
+  "rootToken": "0xrootToken_2",
+  "timestamp": 1639662471018,
+  "to": "0xto_2",
+  "txBurnHash": null,
+  "txHash": "0xtxHash_2",
+  "txStatus": "confirmed",
+  "txType": "deposit",
+}
+`;
