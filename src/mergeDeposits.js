@@ -4,9 +4,9 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
     watchgodDeposits.forEach((tx) => {
         const txHash = tx.txHash;
         mergedDeposits[txHash] = tx;
-        mergedDeposits[txHash].latestStatus = tx.txStatus;
-        mergedDeposits[txHash].watchgodTxStatus = tx.txStatus;
-        mergedDeposits[txHash].txSource = "watchgod_deposits";
+        mergedDeposits[txHash]._latestStatus = tx.txStatus;
+        mergedDeposits[txHash]._watchgodTxStatus = tx.txStatus;
+        mergedDeposits[txHash]._txSource = "watchgod_deposits";
     });
 
     openapiDeposits.forEach((tx) => {
@@ -16,14 +16,14 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
             : false;
 
         mergedDeposits[txHash] = tx;
-        mergedDeposits[txHash].latestStatus = tx.txStatus;
-        mergedDeposits[txHash].openapiTxStatus = tx.txStatus;
+        mergedDeposits[txHash]._latestStatus = tx.txStatus;
+        mergedDeposits[txHash]._openapiTxStatus = tx.txStatus;
 
         if (watchgodTxStatus) {
-            mergedDeposits[txHash].watchgodTxStatus = watchgodTxStatus;
+            mergedDeposits[txHash]._watchgodTxStatus = watchgodTxStatus;
         }
 
-        mergedDeposits[txHash].txSource = "openapi_deposits";
+        mergedDeposits[txHash]._txSource = "openapi_deposits";
     });
 
     return Object.values(mergedDeposits);
