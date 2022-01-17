@@ -1,22 +1,19 @@
-const merger = require("./mergeOpenApiWatchgod");
-const { TX_SOURCE, TX_TYPE } = require("./constants");
+import mergeOpenApiWatchgod from "./mergeOpenApiWatchgod"
 
-// const {
+// import {
 //     openApiDepositResponse,
 //     openApiWithdrawResponse,
 //     openApiBurnResponse,
 //     watchGodResponse,
-// } = require("../responseData");
+// } from "../responseData"
 
-// const mergedData = merger(
+// const mergedData = mergeOpenApiWatchgod(
 //     openApiDepositResponse,
 //     openApiWithdrawResponse,
 //     openApiBurnResponse,
 //     watchGodResponse
 // );
+// console.log(mergedData);
 
-module.exports = {
-    mergeOpenapiWatchgod: merger,
-    TX_SOURCE,
-    TX_TYPE,
-}
+export default mergeOpenApiWatchgod
+export { TX_SOURCE, TX_TYPE } from "./constants"
