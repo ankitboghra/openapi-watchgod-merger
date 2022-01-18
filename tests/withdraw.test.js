@@ -64,77 +64,106 @@ const watchgodExit_1 = {
 test('watchgod burn only', () => {
     mergeOpenApiWatchgod([], [], [], [watchgodBurn_1]).forEach((tx) => {
         expect(tx).toMatchSnapshot()
+        expect(tx).toHaveProperty('_latestStatus', 'confirmed')
+        expect(tx).toHaveProperty('_watchgodBurnTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_txSource', 'watchgod_burns')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
     })
 });
 
 test('openapi burn only', () => {
     mergeOpenApiWatchgod([], [], [openapiBurn_1], []).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'checkpointed')
+        expect(tx).toHaveProperty('_openapiBurnTxStatus', 'checkpointed')
+        expect(tx).toHaveProperty('_txSource', 'openapi_burns')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
     })
 });
 
 test('watchgod exit only', () => {
     mergeOpenApiWatchgod([], [], [], [watchgodExit_1]).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'confirmed')
+        expect(tx).toHaveProperty('_watchgodExitTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_txSource', 'watchgod_exits')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
+        expect(tx).toHaveProperty('_exitTxHash', '0xexitHash_1')
     })
 });
 
 test('openapi exit only', () => {
     mergeOpenApiWatchgod([], [openapiExit_1], [], []).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'exited')
+        expect(tx).toHaveProperty('_openapiExitTxStatus', 'exited')
+        expect(tx).toHaveProperty('_txSource', 'openapi_exits')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
+        expect(tx).toHaveProperty('_exitTxHash', '0xexitHash_1')
     })
 });
 
 test('watchgod burn and openapi burn', () => {
     mergeOpenApiWatchgod([], [], [openapiBurn_1], [watchgodBurn_1]).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'checkpointed')
+        expect(tx).toHaveProperty('_watchgodBurnTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_openapiBurnTxStatus', 'checkpointed')
+        expect(tx).toHaveProperty('_txSource', 'openapi_burns')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
     })
 });
 
 test('watchgod burn, openapi burn, watchgod exit', () => {
     mergeOpenApiWatchgod([], [], [openapiBurn_1], [watchgodBurn_1, watchgodExit_1]).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'confirmed')
+        expect(tx).toHaveProperty('_watchgodBurnTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_openapiBurnTxStatus', 'checkpointed')
+        expect(tx).toHaveProperty('_watchgodExitTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_txSource', 'watchgod_exits')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
+        expect(tx).toHaveProperty('_exitTxHash', '0xexitHash_1')
     })
 });
 
 test('watchgod burn, openapi burn, watchgod exit, openapi exit', () => {
     mergeOpenApiWatchgod([], [openapiExit_1], [openapiBurn_1], [watchgodBurn_1, watchgodExit_1]).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'exited')
+        expect(tx).toHaveProperty('_watchgodBurnTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_openapiBurnTxStatus', 'checkpointed')
+        expect(tx).toHaveProperty('_watchgodExitTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_openapiExitTxStatus', 'exited')
+        expect(tx).toHaveProperty('_txSource', 'openapi_exits')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
+        expect(tx).toHaveProperty('_exitTxHash', '0xexitHash_1')
     })
 });
 
 test('openapi burn, openapi exit', () => {
     mergeOpenApiWatchgod([], [openapiExit_1], [openapiBurn_1], []).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'exited')
+        expect(tx).toHaveProperty('_openapiBurnTxStatus', 'checkpointed')
+        expect(tx).toHaveProperty('_openapiExitTxStatus', 'exited')
+        expect(tx).toHaveProperty('_txSource', 'openapi_exits')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
+        expect(tx).toHaveProperty('_exitTxHash', '0xexitHash_1')
     })
 });
 
 test('watchgod burn, openapi exit', () => {
     mergeOpenApiWatchgod([], [openapiExit_1], [], [watchgodBurn_1]).forEach((tx) => {
         expect(tx).toMatchSnapshot()
-        // expect(tx).toHaveProperty('_latestStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_watchgodTxStatus', 'confirmed')
-        // expect(tx).toHaveProperty('_txSource', 'watchgod_deposits')
+        expect(tx).toHaveProperty('_latestStatus', 'exited')
+        expect(tx).toHaveProperty('_watchgodBurnTxStatus', 'confirmed')
+        expect(tx).toHaveProperty('_openapiExitTxStatus', 'exited')
+        expect(tx).toHaveProperty('_txSource', 'openapi_exits')
+        expect(tx).toHaveProperty('_burnTxHash', '0xburnTxHash_1')
+        expect(tx).toHaveProperty('_exitTxHash', '0xexitHash_1')
     })
 });
+
+// todo: add checks for multiple txs
+
