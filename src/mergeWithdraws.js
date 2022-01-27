@@ -1,3 +1,5 @@
+import { TX_TYPE } from './constants'
+
 export default function mergeWithdraws(
     openapiExits,
     openapiBurns,
@@ -14,6 +16,7 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._burnTxHash = tx.txHash;
         mergedWithdraws[txHash]._watchgodBurnTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
+        mergedWithdraws[txHash]._txType = TX_TYPE.WITHDRAW;
     });
 
     openapiBurns.forEach((tx) => {
@@ -28,6 +31,7 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._burnTxHash = tx.txHash;
         mergedWithdraws[txHash]._openapiBurnTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
+        mergedWithdraws[txHash]._txType = TX_TYPE.WITHDRAW;
 
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
@@ -53,6 +57,7 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
         mergedWithdraws[txHash]._watchgodExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
+        mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
 
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
@@ -87,6 +92,7 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
         mergedWithdraws[txHash]._openapiExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
+        mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
 
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
