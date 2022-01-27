@@ -2,6 +2,7 @@
 
 exports[`openapi and watchgod 1`] = `
 Object {
+  "_depositTxHash": "0xtxHash_1",
   "_latestStatus": "deposited",
   "_openapiTxStatus": "deposited",
   "_txSource": "openapi_deposits",
@@ -27,6 +28,7 @@ Object {
 
 exports[`openapi and watchgod 2`] = `
 Object {
+  "_depositTxHash": "0xtxHash_1",
   "_latestStatus": "deposited",
   "_openapiTxStatus": "deposited",
   "_txSource": "openapi_deposits",
@@ -52,6 +54,7 @@ Object {
 
 exports[`openapi and watchgod 3`] = `
 Object {
+  "_depositTxHash": "0xtxHash_2",
   "_latestStatus": "deposited",
   "_openapiTxStatus": "deposited",
   "_txSource": "openapi_deposits",
@@ -77,6 +80,7 @@ Object {
 
 exports[`openapi deposit only 1`] = `
 Object {
+  "_depositTxHash": "0xtxHash_1",
   "_latestStatus": "deposited",
   "_openapiTxStatus": "deposited",
   "_txSource": "openapi_deposits",
@@ -101,6 +105,7 @@ Object {
 
 exports[`openapi deposits only 1`] = `
 Object {
+  "_depositTxHash": "0xtxHash_1",
   "_latestStatus": "deposited",
   "_openapiTxStatus": "deposited",
   "_txSource": "openapi_deposits",
@@ -125,6 +130,7 @@ Object {
 
 exports[`openapi deposits only 2`] = `
 Object {
+  "_depositTxHash": "0xtxHash_2",
   "_latestStatus": "deposited",
   "_openapiTxStatus": "deposited",
   "_txSource": "openapi_deposits",
@@ -149,6 +155,7 @@ Object {
 
 exports[`watchgod deposit only 1`] = `
 Object {
+  "_depositTxHash": "0xtxHash_1",
   "_latestStatus": "confirmed",
   "_txSource": "watchgod_deposits",
   "_txType": "deposit",
@@ -170,6 +177,7 @@ Object {
 
 exports[`watchgod deposits only 1`] = `
 Object {
+  "_depositTxHash": "0xtxHash_1",
   "_latestStatus": "confirmed",
   "_txSource": "watchgod_deposits",
   "_txType": "deposit",
@@ -191,6 +199,7 @@ Object {
 
 exports[`watchgod deposits only 2`] = `
 Object {
+  "_depositTxHash": "0xtxHash_2",
   "_latestStatus": "confirmed",
   "_txSource": "watchgod_deposits",
   "_txType": "deposit",

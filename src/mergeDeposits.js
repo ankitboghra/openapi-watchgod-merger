@@ -6,6 +6,7 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
     watchgodDeposits.forEach((tx) => {
         const txHash = tx.txHash;
         mergedDeposits[txHash] = tx;
+        mergedDeposits[txHash]._depositTxHash = tx.txHash;
         mergedDeposits[txHash]._latestStatus = tx.txStatus;
         mergedDeposits[txHash]._watchgodTxStatus = tx.txStatus;
         mergedDeposits[txHash]._txSource = "watchgod_deposits";
@@ -19,6 +20,7 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
             : false;
 
         mergedDeposits[txHash] = tx;
+        mergedDeposits[txHash]._depositTxHash = tx.txHash;
         mergedDeposits[txHash]._latestStatus = tx.txStatus;
         mergedDeposits[txHash]._openapiTxStatus = tx.txStatus;
 
