@@ -1,4 +1,4 @@
-import { TX_TYPE } from './constants'
+import { TX_TYPE, TX_SOURCE } from './constants'
 
 export default function mergeWithdraws(
     openapiExits,
@@ -13,7 +13,7 @@ export default function mergeWithdraws(
         const txHash = tx.txHash;
 
         mergedWithdraws[txHash] = tx;
-        mergedWithdraws[txHash]._txSource = "watchgod_burns";
+        mergedWithdraws[txHash]._txSource = TX_SOURCE.WATCHGOD_BURNS;
         mergedWithdraws[txHash]._burnTxHash = tx.txHash;
         mergedWithdraws[txHash]._watchgodBurnTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
@@ -28,7 +28,7 @@ export default function mergeWithdraws(
                 : false;
 
         mergedWithdraws[txHash] = tx;
-        mergedWithdraws[txHash]._txSource = "openapi_burns";
+        mergedWithdraws[txHash]._txSource = TX_SOURCE.OPENAPI_BURNS;
         mergedWithdraws[txHash]._burnTxHash = tx.txHash;
         mergedWithdraws[txHash]._openapiBurnTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
@@ -54,12 +54,12 @@ export default function mergeWithdraws(
                 : false;
 
         mergedWithdraws[txHash] = tx;
-        mergedWithdraws[txHash]._txSource = "watchgod_confirm_exits";
+        mergedWithdraws[txHash]._txSource = TX_SOURCE.WATCHGOD_CONFIRM_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._confirmExitTxHash = tx.txHash;
         mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
-        mergedWithdraws[txHash]._txType = TX_TYPE.ConfirmExit;
+        mergedWithdraws[txHash]._txType = TX_TYPE.CONFIRM_EXIT;
 
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
@@ -96,7 +96,7 @@ export default function mergeWithdraws(
                 : false;
 
         mergedWithdraws[txHash] = tx;
-        mergedWithdraws[txHash]._txSource = "watchgod_exits";
+        mergedWithdraws[txHash]._txSource = TX_SOURCE.WATCHGOD_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
         mergedWithdraws[txHash]._watchgodExitTxStatus = tx.txStatus;
@@ -149,7 +149,7 @@ export default function mergeWithdraws(
                 : false;
 
         mergedWithdraws[txHash] = tx;
-        mergedWithdraws[txHash]._txSource = "openapi_exits";
+        mergedWithdraws[txHash]._txSource = TX_SOURCE.OPENAPI_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
         mergedWithdraws[txHash]._openapiExitTxStatus = tx.txStatus;
