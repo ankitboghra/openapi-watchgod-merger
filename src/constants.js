@@ -11,6 +11,6 @@ export const TX_SOURCE = Object.freeze({
 export const TX_TYPE = Object.freeze({
     DEPOSIT: 'deposit',
     WITHDRAW: 'withdraw',
-    ConfirmExit: 'confirm_exit',
+    CONFIRM_EXIT: 'confirm_exit',
     EXIT: 'exit',
 })

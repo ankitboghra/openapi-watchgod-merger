@@ -51,6 +51,8 @@ import {
     convertWatchgodToInterface,
     convertInterfaceToWatchgod,
 } from "./utils";
+import { TX_TYPE } from './constants'
+
 
 import mergeDeposits from './mergeDeposits'
 import mergeWithdraws from './mergeWithdraws'
@@ -73,7 +75,7 @@ export default function merger(
     );
 
     const watchgodDeposits = watchGodResponse
-        .filter((tx) => tx.txType === "deposit")
+        .filter((tx) => tx.txType === TX_TYPE.DEPOSIT)
         .map((tx) => convertWatchgodToInterface(tx));
 
     const openapiExits = openapiWithdrawResponse.map((tx) =>
@@ -85,15 +87,15 @@ export default function merger(
     );
 
     const watchgodExits = watchGodResponse
-        .filter((tx) => tx.txType === "exit")
+        .filter((tx) => tx.txType === TX_TYPE.EXIT)
         .map((tx) => convertWatchgodToInterface(tx));
 
     const watchgodConfirmExits = watchGodResponse
-        .filter((tx) => tx.txType === "confirm_exit")
+        .filter((tx) => tx.txType === TX_TYPE.CONFIRM_EXIT)
         .map((tx) => convertWatchgodToInterface(tx));
 
     const watchgodBurns = watchGodResponse
-        .filter((tx) => tx.txType === "withdraw")
+        .filter((tx) => tx.txType === TX_TYPE.WITHDRAW)
         .map((tx) => convertWatchgodToInterface(tx));
 
     return [

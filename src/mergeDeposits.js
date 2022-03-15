@@ -1,4 +1,4 @@
-import { TX_TYPE } from './constants'
+import { TX_TYPE, TX_SOURCE } from './constants'
 
 export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
 
@@ -9,7 +9,7 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
         mergedDeposits[txHash]._depositTxHash = tx.txHash;
         mergedDeposits[txHash]._latestStatus = tx.txStatus;
         mergedDeposits[txHash]._watchgodTxStatus = tx.txStatus;
-        mergedDeposits[txHash]._txSource = "watchgod_deposits";
+        mergedDeposits[txHash]._txSource = TX_SOURCE.WATCHGOD_DEPOSITS;
         mergedDeposits[txHash]._txType = TX_TYPE.DEPOSIT;
     });
 
@@ -28,7 +28,7 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits) {
             mergedDeposits[txHash]._watchgodTxStatus = watchgodTxStatus;
         }
 
-        mergedDeposits[txHash]._txSource = "openapi_deposits";
+        mergedDeposits[txHash]._txSource = TX_SOURCE.OPENAPI_DEPOSITS;
         mergedDeposits[txHash]._txType = TX_TYPE.DEPOSIT;
     });
 
