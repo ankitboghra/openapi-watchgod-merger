@@ -13,7 +13,10 @@ import mergeOpenApiWatchgod from "./mergeOpenApiWatchgod"
 //     openApiBurnResponse,
 //     watchGodResponse
 // );
+// console.clear()
+// console.time('mergeOpenApiWatchgod')
 // console.log(mergedData);
+// console.timeEnd('mergeOpenApiWatchgod')
 
 export default mergeOpenApiWatchgod
 export { TX_SOURCE, TX_TYPE } from "./constants"

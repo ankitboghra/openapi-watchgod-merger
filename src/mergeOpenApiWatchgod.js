@@ -88,12 +88,16 @@ export default function merger(
         .filter((tx) => tx.txType === "exit")
         .map((tx) => convertWatchgodToInterface(tx));
 
+    const watchgodConfirmExits = watchGodResponse
+        .filter((tx) => tx.txType === "confirm_exit")
+        .map((tx) => convertWatchgodToInterface(tx));
+
     const watchgodBurns = watchGodResponse
         .filter((tx) => tx.txType === "withdraw")
         .map((tx) => convertWatchgodToInterface(tx));
 
     return [
         ...mergeDeposits(openapiDeposits, watchgodDeposits),
-        ...mergeWithdraws(openapiExits, openapiBurns, watchgodExits, watchgodBurns),
+        ...mergeWithdraws(openapiExits, openapiBurns, watchgodExits, watchgodConfirmExits, watchgodBurns),
     ];
 }

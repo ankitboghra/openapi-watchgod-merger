@@ -4,6 +4,7 @@ export default function mergeWithdraws(
     openapiExits,
     openapiBurns,
     watchgodExits,
+    watchgodConfirmExits,
     watchgodBurns
 ) {
     const mergedWithdraws = {};
@@ -38,6 +39,37 @@ export default function mergeWithdraws(
         }
     });
 
+    watchgodConfirmExits.forEach((tx) => {
+        const txHash = tx.txBurnHash;
+
+        const watchgodBurnTxStatus =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
+                ? mergedWithdraws[txHash]._watchgodBurnTxStatus
+                : false;
+
+
+        const openapiBurnTxStatus =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTxStatus
+                ? mergedWithdraws[txHash]._openapiBurnTxStatus
+                : false;
+
+        mergedWithdraws[txHash] = tx;
+        mergedWithdraws[txHash]._txSource = "watchgod_confirm_exits";
+        mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
+        mergedWithdraws[txHash]._confirmExitTxHash = tx.txHash;
+        mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = tx.txStatus;
+        mergedWithdraws[txHash]._latestStatus = tx.txStatus;
+        mergedWithdraws[txHash]._txType = TX_TYPE.ConfirmExit;
+
+        if (watchgodBurnTxStatus) {
+            mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
+        }
+
+        if (openapiBurnTxStatus) {
+            mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
+        }
+    })
+
     watchgodExits.forEach((tx) => {
         const txHash = tx.txBurnHash;
 
@@ -51,6 +83,18 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._openapiBurnTxStatus
                 : false;
 
+        const watchgodConfirmExitTxStatus =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+                ? mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+                : false;
+
+        // relying on other confirmExitTxOnly,
+        // since an exit tx will not have confirm exit tx details
+        const confirmExitTxHash =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._confirmExitTxHash
+                ? mergedWithdraws[txHash]._confirmExitTxHash
+                : false;
+
         mergedWithdraws[txHash] = tx;
         mergedWithdraws[txHash]._txSource = "watchgod_exits";
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
@@ -59,12 +103,20 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
 
+        if (confirmExitTxHash) {
+            mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
+        }
+
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
         }
 
         if (openapiBurnTxStatus) {
             mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
+        }
+
+        if (watchgodConfirmExitTxStatus) {
+            mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
         }
     });
 
@@ -81,9 +133,19 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._openapiBurnTxStatus
                 : false;
 
+        const watchgodConfirmExitTxStatus =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+                ? mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+                : false;
+
         const watchgodExitTxStatus =
             mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodExitTxStatus
                 ? mergedWithdraws[txHash]._watchgodExitTxStatus
+                : false;
+
+        const confirmExitTxHash =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._confirmExitTxHash
+                ? mergedWithdraws[txHash]._confirmExitTxHash
                 : false;
 
         mergedWithdraws[txHash] = tx;
@@ -94,12 +156,20 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
 
+        if (confirmExitTxHash) {
+            mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
+        }
+
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
         }
 
         if (openapiBurnTxStatus) {
             mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
+        }
+
+        if (watchgodConfirmExitTxStatus) {
+            mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
         }
 
         if (watchgodExitTxStatus) {
