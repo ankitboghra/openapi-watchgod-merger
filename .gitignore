@@ -1,3 +1,5 @@
 node_modules
 responseData.js
 dist
+
+.DS_STORE
