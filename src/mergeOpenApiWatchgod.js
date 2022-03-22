@@ -78,6 +78,10 @@ export default function merger(
         .filter((tx) => tx.txType === TX_TYPE.DEPOSIT)
         .map((tx) => convertWatchgodToInterface(tx));
 
+    const watchgodDepositApprovals = watchGodResponse
+        .filter((tx) => tx.txType === TX_TYPE.APPROVE_DEPOSIT)
+        .map((tx) => convertWatchgodToInterface(tx));
+
     const openapiExits = openapiWithdrawResponse.map((tx) =>
         convertOpenapiToInterface(tx)
     );
@@ -99,7 +103,7 @@ export default function merger(
         .map((tx) => convertWatchgodToInterface(tx));
 
     return [
-        ...mergeDeposits(openapiDeposits, watchgodDeposits),
+        ...mergeDeposits(openapiDeposits, watchgodDeposits, watchgodDepositApprovals),
         ...mergeWithdraws(openapiExits, openapiBurns, watchgodExits, watchgodConfirmExits, watchgodBurns),
     ];
 }
