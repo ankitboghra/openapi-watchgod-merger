@@ -1,5 +1,11 @@
 import { TX_TYPE, TX_SOURCE } from './constants'
 
+/**
+ * unlike withdraw transactions, we are not linking
+ * a deposit transaction with an deposit approval tx
+ * as there is no 1-1 mapping, instead it is n-m mapping
+ */
+
 export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgodDepositApprovals) {
 
     const mergedDeposits = {};
@@ -16,28 +22,16 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgo
 
     watchgodDeposits.forEach((tx) => {
         const txHash = tx.txHash;
-        // const watchgodDepositApprovalTxStatus = mergedDeposits[txHash]
-        //     ? mergedDeposits[txHash]._watchgodDepositApprovalTxStatus
-        //     : false;
-
         mergedDeposits[txHash] = tx;
         mergedDeposits[txHash]._depositTxHash = tx.txHash;
         mergedDeposits[txHash]._latestStatus = tx.txStatus;
         mergedDeposits[txHash]._watchgodTxStatus = tx.txStatus;
-
-        // if (watchgodDepositApprovalTxStatus) {
-        //     mergedDeposits[txHash]._watchgodDepositApprovalTxStatus = watchgodDepositApprovalTxStatus;
-        // }
-
         mergedDeposits[txHash]._txSource = TX_SOURCE.WATCHGOD_DEPOSITS;
         mergedDeposits[txHash]._txType = TX_TYPE.DEPOSIT;
     });
 
     openapiDeposits.forEach((tx) => {
         const txHash = tx.txHash;
-        // const watchgodDepositApprovalTxStatus = mergedDeposits[txHash]
-        //     ? mergedDeposits[txHash]._watchgodDepositApprovalTxStatus
-        //     : false;
         const watchgodTxStatus = mergedDeposits[txHash]
             ? mergedDeposits[txHash].txStatus
             : false;
@@ -46,10 +40,6 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgo
         mergedDeposits[txHash]._depositTxHash = tx.txHash;
         mergedDeposits[txHash]._latestStatus = tx.txStatus;
         mergedDeposits[txHash]._openapiTxStatus = tx.txStatus;
-
-        // if (watchgodDepositApprovalTxStatus) {
-        //     mergedDeposits[txHash]._watchgodDepositApprovalTxStatus = watchgodDepositApprovalTxStatus;
-        // }
 
         if (watchgodTxStatus) {
             mergedDeposits[txHash]._watchgodTxStatus = watchgodTxStatus;
