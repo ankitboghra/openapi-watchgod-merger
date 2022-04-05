@@ -6,7 +6,7 @@ import { TX_TYPE, TX_SOURCE } from './constants'
  * as there is no 1-1 mapping, instead it is n-m mapping
  */
 
-export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgodDepositApprovals) {
+export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgodDepositApprovals, watchgodOthers) {
 
     const mergedDeposits = {};
     watchgodDepositApprovals.forEach((tx) => {
@@ -28,6 +28,21 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgo
         mergedDeposits[txHash]._watchgodTxStatus = tx.txStatus;
         mergedDeposits[txHash]._txSource = TX_SOURCE.WATCHGOD_DEPOSITS;
         mergedDeposits[txHash]._txType = TX_TYPE.DEPOSIT;
+
+        if (tx.newHash) {
+            mergedDeposits[txHash]._oldDepositTxHash = tx.txHash;
+            mergedDeposits[txHash]._oldWatchgodTxStatus = tx.txStatus;
+            mergedDeposits[txHash]._depositTxHash = tx.newHash;
+
+            if (tx.txStatus === 'speedup') {
+                const speedupTx = watchgodOthers.find((speedupTx) =>
+                    tx.txHash === speedupTx.oldHash
+                )
+
+                mergedDeposits[txHash]._latestStatus = speedupTx.txStatus;
+                mergedDeposits[txHash]._watchgodTxStatus = speedupTx.txStatus;
+            }
+        }
     });
 
     openapiDeposits.forEach((tx) => {

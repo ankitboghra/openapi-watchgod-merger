@@ -102,8 +102,12 @@ export default function merger(
         .filter((tx) => tx.txType === TX_TYPE.WITHDRAW)
         .map((tx) => convertWatchgodToInterface(tx));
 
+    const watchgodOthers = watchGodResponse
+        .filter((tx) => tx.txType === "other")
+        .map((tx) => convertWatchgodToInterface(tx));
+
     return [
-        ...mergeDeposits(openapiDeposits, watchgodDeposits, watchgodDepositApprovals),
-        ...mergeWithdraws(openapiExits, openapiBurns, watchgodExits, watchgodConfirmExits, watchgodBurns),
+        ...mergeDeposits(openapiDeposits, watchgodDeposits, watchgodDepositApprovals, watchgodOthers),
+        ...mergeWithdraws(openapiExits, openapiBurns, watchgodExits, watchgodConfirmExits, watchgodBurns, watchgodOthers),
     ];
 }
