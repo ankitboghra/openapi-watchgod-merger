@@ -29,16 +29,20 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgo
         mergedDeposits[txHash]._txSource = TX_SOURCE.WATCHGOD_DEPOSITS;
         mergedDeposits[txHash]._txType = TX_TYPE.DEPOSIT;
 
-        if (tx.newHash) {
+        /**
+         * for handling dropped replaced tx,
+         * just append new status from replaced tx to old tx
+         * so that UI can show latest status without refreshing/redirecting
+         */
+        if (tx.newHash && tx.txStatus === 'speedup') {
             mergedDeposits[txHash]._oldDepositTxHash = tx.txHash;
             mergedDeposits[txHash]._oldWatchgodTxStatus = tx.txStatus;
             mergedDeposits[txHash]._depositTxHash = tx.newHash;
 
-            if (tx.txStatus === 'speedup') {
-                const speedupTx = watchgodOthers.find((speedupTx) =>
-                    tx.txHash === speedupTx.oldHash
-                )
-
+            const speedupTx = watchgodOthers.find((speedupTx) =>
+                tx.newHash === speedupTx.txHash
+            )
+            if (speedupTx) {
                 mergedDeposits[txHash]._latestStatus = speedupTx.txStatus;
                 mergedDeposits[txHash]._watchgodTxStatus = speedupTx.txStatus;
             }
@@ -62,6 +66,23 @@ export default function mergeDeposits(openapiDeposits, watchgodDeposits, watchgo
 
         mergedDeposits[txHash]._txSource = TX_SOURCE.OPENAPI_DEPOSITS;
         mergedDeposits[txHash]._txType = TX_TYPE.DEPOSIT;
+
+        /**
+         * if any speed up tx exists for this openapi tx
+         * remove the dropped tx with old hash, otherwise
+         * UI will have 2 entries for one transaction,
+         * also, openapi does not know anything about dropped replaced,
+         * so instead of merging the transactions, delete the older
+         * dropped tx
+         */
+        // 
+        const speedupTx = watchgodOthers.find((speedupTx) => {
+            return tx.txHash === speedupTx.txHash
+        }
+        )
+        if (speedupTx) {
+            delete mergedDeposits[speedupTx.oldHash]
+        }
     });
 
     return Object.values(mergedDeposits);
