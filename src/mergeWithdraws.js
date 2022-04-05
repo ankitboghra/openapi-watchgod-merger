@@ -5,7 +5,8 @@ export default function mergeWithdraws(
     openapiBurns,
     watchgodExits,
     watchgodConfirmExits,
-    watchgodBurns
+    watchgodBurns,
+    watchgodOthers
 ) {
     const mergedWithdraws = {};
 
@@ -68,6 +69,20 @@ export default function mergeWithdraws(
         if (openapiBurnTxStatus) {
             mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
         }
+
+        // below logic is only for dropped/replaced txs
+        if (tx.newHash && tx.txStatus === 'speedup') {
+            const speedupTx = watchgodOthers.find((speedupTx) =>
+                tx.newHash === speedupTx.txHash
+            )
+
+            if (speedupTx) {
+                mergedWithdraws[txHash]._oldConfirmExitTxHash = tx.txHash
+                mergedWithdraws[txHash]._confirmExitTxHash = tx.newHash
+                mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = speedupTx.txStatus;
+                mergedWithdraws[txHash]._latestStatus = speedupTx.txStatus;
+            }
+        }
     })
 
     watchgodExits.forEach((tx) => {
@@ -118,6 +133,20 @@ export default function mergeWithdraws(
         if (watchgodConfirmExitTxStatus) {
             mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
         }
+
+        // below logic is only for dropped/replaced txs
+        if (tx.newHash && tx.txStatus === 'speedup') {
+            const speedupTx = watchgodOthers.find((speedupTx) =>
+                tx.newHash === speedupTx.txHash
+            )
+
+            if (speedupTx) {
+                mergedWithdraws[txHash]._oldExitTxHash = tx.txHash
+                mergedWithdraws[txHash]._exitTxHash = speedupTx.txHash
+                mergedWithdraws[txHash]._watchgodExitTxStatus = speedupTx.txStatus;
+                mergedWithdraws[txHash]._latestStatus = speedupTx.txStatus;
+            }
+        }
     });
 
     openapiExits.forEach((tx) => {
@@ -148,13 +177,27 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._confirmExitTxHash
                 : false;
 
+        /**
+         * use this exit txhash from watchgod in case where
+         * openapi has not set exit tx details yet
+         */
+        const exitTxHash =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._exitTxHash
+                ? mergedWithdraws[txHash]._exitTxHash
+                : false;
+
         mergedWithdraws[txHash] = tx;
         mergedWithdraws[txHash]._txSource = TX_SOURCE.OPENAPI_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
+        mergedWithdraws[txHash]._confirmExitTxHash = tx.exitStartedTxHash;
         mergedWithdraws[txHash]._openapiExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
+
+        if (exitTxHash && !mergedWithdraws[txHash]._exitTxHash) {
+            mergedWithdraws[txHash]._exitTxHash = exitTxHash
+        }
 
         if (confirmExitTxHash) {
             mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
