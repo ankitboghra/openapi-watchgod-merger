@@ -23,6 +23,16 @@ export function convertOpenapiToInterface(openapiTx) {
         tx["timestamp"] = dateInSeconds;
     }
 
+    // specifically for openapi exit endpoint
+    if (tx["burnTxTimestamp"]) {
+        const dateInSeconds = new Date(tx["burnTxTimestamp"]).getTime() / 1000;
+        tx["burnTxTimestamp"] = dateInSeconds;
+    }
+    if (tx["exitStartedTimeStamp"]) {
+        const dateInSeconds = new Date(tx["exitStartedTimeStamp"]).getTime() / 1000;
+        tx["exitStartedTimeStamp"] = dateInSeconds;
+    }
+
     return tx;
 }
 

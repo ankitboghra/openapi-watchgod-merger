@@ -19,6 +19,7 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._watchgodBurnTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.WITHDRAW;
+        mergedWithdraws[txHash]._watchgodBurnTimestamp = tx.timestamp;
     });
 
     openapiBurns.forEach((tx) => {
@@ -28,15 +29,24 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._watchgodBurnTxStatus
                 : false;
 
+        const watchgodBurnTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
+                ? mergedWithdraws[txHash]._watchgodBurnTimestamp
+                : false;
+
         mergedWithdraws[txHash] = tx;
         mergedWithdraws[txHash]._txSource = TX_SOURCE.OPENAPI_BURNS;
         mergedWithdraws[txHash]._burnTxHash = tx.txHash;
         mergedWithdraws[txHash]._openapiBurnTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.WITHDRAW;
+        mergedWithdraws[txHash]._openapiBurnTimestamp = tx.timestamp;
 
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
+        }
+        if (watchgodBurnTimestamp) {
+            mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;
         }
     });
 
@@ -54,6 +64,16 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._openapiBurnTxStatus
                 : false;
 
+        const watchgodBurnTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
+                ? mergedWithdraws[txHash]._watchgodBurnTimestamp
+                : false;
+
+        const openapiBurnTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTimestamp
+                ? mergedWithdraws[txHash]._openapiBurnTimestamp
+                : false;
+
         mergedWithdraws[txHash] = tx;
         mergedWithdraws[txHash]._txSource = TX_SOURCE.WATCHGOD_CONFIRM_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
@@ -61,6 +81,7 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.CONFIRM_EXIT;
+        mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp = tx.timestamp;
 
         if (watchgodBurnTxStatus) {
             mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
@@ -68,6 +89,13 @@ export default function mergeWithdraws(
 
         if (openapiBurnTxStatus) {
             mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
+        }
+
+        if (watchgodBurnTimestamp) {
+            mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;
+        }
+        if (openapiBurnTimestamp) {
+            mergedWithdraws[txHash]._openapiBurnTimestamp = openapiBurnTimestamp;
         }
 
         // below logic is only for dropped/replaced txs
@@ -110,6 +138,22 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._confirmExitTxHash
                 : false;
 
+        const watchgodBurnTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
+                ? mergedWithdraws[txHash]._watchgodBurnTimestamp
+                : false;
+
+        const openapiBurnTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTimestamp
+                ? mergedWithdraws[txHash]._openapiBurnTimestamp
+                : false;
+
+        const watchgodConfirmExitsTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp
+                ? mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp
+                : false;
+
+
         mergedWithdraws[txHash] = tx;
         mergedWithdraws[txHash]._txSource = TX_SOURCE.WATCHGOD_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
@@ -117,6 +161,7 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._watchgodExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
+        mergedWithdraws[txHash]._watchgodExitTimestamp = tx.timestamp;
 
         if (confirmExitTxHash) {
             mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
@@ -132,6 +177,16 @@ export default function mergeWithdraws(
 
         if (watchgodConfirmExitTxStatus) {
             mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
+        }
+
+        if (watchgodBurnTimestamp) {
+            mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;
+        }
+        if (openapiBurnTimestamp) {
+            mergedWithdraws[txHash]._openapiBurnTimestamp = openapiBurnTimestamp;
+        }
+        if (watchgodConfirmExitsTimestamp) {
+            mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp = watchgodConfirmExitsTimestamp;
         }
 
         // below logic is only for dropped/replaced txs
@@ -177,6 +232,26 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._confirmExitTxHash
                 : false;
 
+        const watchgodBurnTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
+                ? mergedWithdraws[txHash]._watchgodBurnTimestamp
+                : false;
+
+        // const openapiBurnTimestamp =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTimestamp
+        //         ? mergedWithdraws[txHash]._openapiBurnTimestamp
+        //         : false;
+
+        const watchgodConfirmExitsTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp
+                ? mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp
+                : false;
+
+        const watchgodExitTimestamp =
+            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodExitTimestamp
+                ? mergedWithdraws[txHash]._watchgodExitTimestamp
+                : false;
+
         /**
          * use this exit txhash from watchgod in case where
          * openapi has not set exit tx details yet
@@ -194,6 +269,9 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._openapiExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
+        mergedWithdraws[txHash]._openapiExitTimestamp = tx.timestamp;
+        mergedWithdraws[txHash]._openapiBurnTimestamp = tx.burnTxTimestamp;
+        mergedWithdraws[txHash]._openapiConfirmExitTimestamp = tx.exitStartedTimeStamp;
 
         if (exitTxHash && !mergedWithdraws[txHash]._exitTxHash) {
             mergedWithdraws[txHash]._exitTxHash = exitTxHash
@@ -217,6 +295,19 @@ export default function mergeWithdraws(
 
         if (watchgodExitTxStatus) {
             mergedWithdraws[txHash]._watchgodExitTxStatus = watchgodExitTxStatus;
+        }
+
+        if (watchgodBurnTimestamp) {
+            mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;
+        }
+        // if (openapiBurnTimestamp) {
+        //     mergedWithdraws[txHash]._openapiBurnTimestamp = openapiBurnTimestamp;
+        // }
+        if (watchgodConfirmExitsTimestamp) {
+            mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp = watchgodConfirmExitsTimestamp;
+        }
+        if (watchgodExitTimestamp) {
+            mergedWithdraws[txHash]._watchgodExitTimestamp = watchgodExitTimestamp;
         }
     });
 
