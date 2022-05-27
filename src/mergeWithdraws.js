@@ -265,6 +265,14 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._txSource = TX_SOURCE.OPENAPI_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
+        /**
+        * explanation for
+        * mergedWithdraws[txHash]._exitTxHash = tx.txHash || tx.exitCompletedTxHash;
+        * 
+        * for plasma exit tx, openapi does not send transactionHash field for plasma exits,
+        * instead sends exitCompletedTxHash
+        */
+        mergedWithdraws[txHash]._exitTxHash = tx.txHash || tx.exitCompletedTxHash;
         mergedWithdraws[txHash]._confirmExitTxHash = tx.exitStartedTxHash;
         mergedWithdraws[txHash]._openapiExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
