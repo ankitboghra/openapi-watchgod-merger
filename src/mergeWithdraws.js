@@ -6,7 +6,6 @@ export default function mergeWithdraws(
     watchgodExits,
     watchgodConfirmExits,
     watchgodBurns,
-    watchgodOthers
 ) {
     const mergedWithdraws = {};
 
@@ -24,10 +23,10 @@ export default function mergeWithdraws(
 
     openapiBurns.forEach((tx) => {
         const txHash = tx.txHash;
-        const watchgodBurnTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
-                ? mergedWithdraws[txHash]._watchgodBurnTxStatus
-                : false;
+        // const watchgodBurnTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         ? mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         : false;
 
         const watchgodBurnTimestamp =
             mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
@@ -37,14 +36,14 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash] = tx;
         mergedWithdraws[txHash]._txSource = TX_SOURCE.OPENAPI_BURNS;
         mergedWithdraws[txHash]._burnTxHash = tx.txHash;
-        mergedWithdraws[txHash]._openapiBurnTxStatus = tx.txStatus;
+        // mergedWithdraws[txHash]._openapiBurnTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.WITHDRAW;
         mergedWithdraws[txHash]._openapiBurnTimestamp = tx.timestamp;
 
-        if (watchgodBurnTxStatus) {
-            mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
-        }
+        // if (watchgodBurnTxStatus) {
+        //     mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
+        // }
         if (watchgodBurnTimestamp) {
             mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;
         }
@@ -53,16 +52,16 @@ export default function mergeWithdraws(
     watchgodConfirmExits.forEach((tx) => {
         const txHash = tx.txBurnHash;
 
-        const watchgodBurnTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
-                ? mergedWithdraws[txHash]._watchgodBurnTxStatus
-                : false;
+        // const watchgodBurnTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         ? mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         : false;
 
 
-        const openapiBurnTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTxStatus
-                ? mergedWithdraws[txHash]._openapiBurnTxStatus
-                : false;
+        // const openapiBurnTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTxStatus
+        //         ? mergedWithdraws[txHash]._openapiBurnTxStatus
+        //         : false;
 
         const watchgodBurnTimestamp =
             mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
@@ -78,18 +77,18 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._txSource = TX_SOURCE.WATCHGOD_CONFIRM_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._confirmExitTxHash = tx.txHash;
-        mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = tx.txStatus;
+        // mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.CONFIRM_EXIT;
         mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp = tx.timestamp;
 
-        if (watchgodBurnTxStatus) {
-            mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
-        }
+        // if (watchgodBurnTxStatus) {
+        //     mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
+        // }
 
-        if (openapiBurnTxStatus) {
-            mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
-        }
+        // if (openapiBurnTxStatus) {
+        //     mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
+        // }
 
         if (watchgodBurnTimestamp) {
             mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;
@@ -97,46 +96,32 @@ export default function mergeWithdraws(
         if (openapiBurnTimestamp) {
             mergedWithdraws[txHash]._openapiBurnTimestamp = openapiBurnTimestamp;
         }
-
-        // below logic is only for dropped/replaced txs
-        if (tx.newHash && tx.txStatus === 'speedup') {
-            const speedupTx = watchgodOthers.find((speedupTx) =>
-                tx.newHash === speedupTx.txHash
-            )
-
-            if (speedupTx) {
-                mergedWithdraws[txHash]._oldConfirmExitTxHash = tx.txHash
-                mergedWithdraws[txHash]._confirmExitTxHash = tx.newHash
-                mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = speedupTx.txStatus;
-                mergedWithdraws[txHash]._latestStatus = speedupTx.txStatus;
-            }
-        }
     })
 
     watchgodExits.forEach((tx) => {
         const txHash = tx.txBurnHash;
 
-        const watchgodBurnTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
-                ? mergedWithdraws[txHash]._watchgodBurnTxStatus
-                : false;
+        // const watchgodBurnTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         ? mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         : false;
 
-        const openapiBurnTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTxStatus
-                ? mergedWithdraws[txHash]._openapiBurnTxStatus
-                : false;
+        // const openapiBurnTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTxStatus
+        //         ? mergedWithdraws[txHash]._openapiBurnTxStatus
+        //         : false;
 
-        const watchgodConfirmExitTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
-                ? mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
-                : false;
+        // const watchgodConfirmExitTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+        //         ? mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+        //         : false;
 
-        // relying on other confirmExitTxOnly,
-        // since an exit tx will not have confirm exit tx details
-        const confirmExitTxHash =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._confirmExitTxHash
-                ? mergedWithdraws[txHash]._confirmExitTxHash
-                : false;
+        // // relying on other confirmExitTxOnly,
+        // // since an exit tx will not have confirm exit tx details
+        // const confirmExitTxHash =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._confirmExitTxHash
+        //         ? mergedWithdraws[txHash]._confirmExitTxHash
+        //         : false;
 
         const watchgodBurnTimestamp =
             mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
@@ -158,26 +143,26 @@ export default function mergeWithdraws(
         mergedWithdraws[txHash]._txSource = TX_SOURCE.WATCHGOD_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
-        mergedWithdraws[txHash]._watchgodExitTxStatus = tx.txStatus;
+        // mergedWithdraws[txHash]._watchgodExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
         mergedWithdraws[txHash]._watchgodExitTimestamp = tx.timestamp;
 
-        if (confirmExitTxHash) {
-            mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
-        }
+        // if (confirmExitTxHash) {
+        //     mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
+        // }
 
-        if (watchgodBurnTxStatus) {
-            mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
-        }
+        // if (watchgodBurnTxStatus) {
+        //     mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
+        // }
 
-        if (openapiBurnTxStatus) {
-            mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
-        }
+        // if (openapiBurnTxStatus) {
+        //     mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
+        // }
 
-        if (watchgodConfirmExitTxStatus) {
-            mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
-        }
+        // if (watchgodConfirmExitTxStatus) {
+        //     mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
+        // }
 
         if (watchgodBurnTimestamp) {
             mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;
@@ -189,48 +174,48 @@ export default function mergeWithdraws(
             mergedWithdraws[txHash]._watchgodConfirmExitsTimestamp = watchgodConfirmExitsTimestamp;
         }
 
-        // below logic is only for dropped/replaced txs
-        if (tx.newHash && tx.txStatus === 'speedup') {
-            const speedupTx = watchgodOthers.find((speedupTx) =>
-                tx.newHash === speedupTx.txHash
-            )
+        // // below logic is only for dropped/replaced txs
+        // if (tx.newHash && tx.txStatus === 'speedup') {
+        //     const speedupTx = watchgodOthers.find((speedupTx) =>
+        //         tx.newHash === speedupTx.txHash
+        //     )
 
-            if (speedupTx) {
-                mergedWithdraws[txHash]._oldExitTxHash = tx.txHash
-                mergedWithdraws[txHash]._exitTxHash = speedupTx.txHash
-                mergedWithdraws[txHash]._watchgodExitTxStatus = speedupTx.txStatus;
-                mergedWithdraws[txHash]._latestStatus = speedupTx.txStatus;
-            }
-        }
+        //     if (speedupTx) {
+        //         mergedWithdraws[txHash]._oldExitTxHash = tx.txHash
+        //         mergedWithdraws[txHash]._exitTxHash = speedupTx.txHash
+        //         mergedWithdraws[txHash]._watchgodExitTxStatus = speedupTx.txStatus;
+        //         mergedWithdraws[txHash]._latestStatus = speedupTx.txStatus;
+        //     }
+        // }
     });
 
     openapiExits.forEach((tx) => {
         const txHash = tx.txBurnHash;
 
-        const watchgodBurnTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
-                ? mergedWithdraws[txHash]._watchgodBurnTxStatus
-                : false;
+        // const watchgodBurnTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         ? mergedWithdraws[txHash]._watchgodBurnTxStatus
+        //         : false;
 
-        const openapiBurnTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTxStatus
-                ? mergedWithdraws[txHash]._openapiBurnTxStatus
-                : false;
+        // const openapiBurnTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._openapiBurnTxStatus
+        //         ? mergedWithdraws[txHash]._openapiBurnTxStatus
+        //         : false;
 
-        const watchgodConfirmExitTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
-                ? mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
-                : false;
+        // const watchgodConfirmExitTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+        //         ? mergedWithdraws[txHash]._watchgodConfirmExitTxStatus
+        //         : false;
 
-        const watchgodExitTxStatus =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodExitTxStatus
-                ? mergedWithdraws[txHash]._watchgodExitTxStatus
-                : false;
+        // const watchgodExitTxStatus =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodExitTxStatus
+        //         ? mergedWithdraws[txHash]._watchgodExitTxStatus
+        //         : false;
 
-        const confirmExitTxHash =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._confirmExitTxHash
-                ? mergedWithdraws[txHash]._confirmExitTxHash
-                : false;
+        // const confirmExitTxHash =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._confirmExitTxHash
+        //         ? mergedWithdraws[txHash]._confirmExitTxHash
+        //         : false;
 
         const watchgodBurnTimestamp =
             mergedWithdraws[txHash] && mergedWithdraws[txHash]._watchgodBurnTimestamp
@@ -252,58 +237,58 @@ export default function mergeWithdraws(
                 ? mergedWithdraws[txHash]._watchgodExitTimestamp
                 : false;
 
-        /**
-         * use this exit txhash from watchgod in case where
-         * openapi has not set exit tx details yet
-         */
-        const exitTxHash =
-            mergedWithdraws[txHash] && mergedWithdraws[txHash]._exitTxHash
-                ? mergedWithdraws[txHash]._exitTxHash
-                : false;
+        // /**
+        //  * use this exit txhash from watchgod in case where
+        //  * openapi has not set exit tx details yet
+        //  */
+        // const exitTxHash =
+        //     mergedWithdraws[txHash] && mergedWithdraws[txHash]._exitTxHash
+        //         ? mergedWithdraws[txHash]._exitTxHash
+        //         : false;
 
         mergedWithdraws[txHash] = tx;
         mergedWithdraws[txHash]._txSource = TX_SOURCE.OPENAPI_EXITS;
         mergedWithdraws[txHash]._burnTxHash = tx.txBurnHash;
         mergedWithdraws[txHash]._exitTxHash = tx.txHash;
         /**
-        * explanation for
-        * mergedWithdraws[txHash]._exitTxHash = tx.txHash || tx.exitCompletedTxHash;
-        * 
-        * for plasma exit tx, openapi does not send transactionHash field for plasma exits,
-        * instead sends exitCompletedTxHash
-        */
+         * explanation for
+         * mergedWithdraws[txHash]._exitTxHash = tx.txHash || tx.exitCompletedTxHash;
+         * 
+         * for plasma exit tx, openapi does not send transactionHash field for plasma exits,
+         * instead sends exitCompletedTxHash
+         */
         mergedWithdraws[txHash]._exitTxHash = tx.txHash || tx.exitCompletedTxHash;
         mergedWithdraws[txHash]._confirmExitTxHash = tx.exitStartedTxHash;
-        mergedWithdraws[txHash]._openapiExitTxStatus = tx.txStatus;
+        // mergedWithdraws[txHash]._openapiExitTxStatus = tx.txStatus;
         mergedWithdraws[txHash]._latestStatus = tx.txStatus;
         mergedWithdraws[txHash]._txType = TX_TYPE.EXIT;
         mergedWithdraws[txHash]._openapiExitTimestamp = tx.timestamp;
         mergedWithdraws[txHash]._openapiBurnTimestamp = tx.burnTxTimestamp;
         mergedWithdraws[txHash]._openapiConfirmExitTimestamp = tx.exitStartedTimeStamp;
 
-        if (exitTxHash && !mergedWithdraws[txHash]._exitTxHash) {
-            mergedWithdraws[txHash]._exitTxHash = exitTxHash
-        }
+        // if (exitTxHash && !mergedWithdraws[txHash]._exitTxHash) {
+        //     mergedWithdraws[txHash]._exitTxHash = exitTxHash
+        // }
 
-        if (confirmExitTxHash) {
-            mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
-        }
+        // if (confirmExitTxHash) {
+        //     mergedWithdraws[txHash]._confirmExitTxHash = confirmExitTxHash;
+        // }
 
-        if (watchgodBurnTxStatus) {
-            mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
-        }
+        // if (watchgodBurnTxStatus) {
+        //     mergedWithdraws[txHash]._watchgodBurnTxStatus = watchgodBurnTxStatus;
+        // }
 
-        if (openapiBurnTxStatus) {
-            mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
-        }
+        // if (openapiBurnTxStatus) {
+        //     mergedWithdraws[txHash]._openapiBurnTxStatus = openapiBurnTxStatus;
+        // }
 
-        if (watchgodConfirmExitTxStatus) {
-            mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
-        }
+        // if (watchgodConfirmExitTxStatus) {
+        //     mergedWithdraws[txHash]._watchgodConfirmExitTxStatus = watchgodConfirmExitTxStatus;
+        // }
 
-        if (watchgodExitTxStatus) {
-            mergedWithdraws[txHash]._watchgodExitTxStatus = watchgodExitTxStatus;
-        }
+        // if (watchgodExitTxStatus) {
+        //     mergedWithdraws[txHash]._watchgodExitTxStatus = watchgodExitTxStatus;
+        // }
 
         if (watchgodBurnTimestamp) {
             mergedWithdraws[txHash]._watchgodBurnTimestamp = watchgodBurnTimestamp;

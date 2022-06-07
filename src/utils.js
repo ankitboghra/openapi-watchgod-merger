@@ -54,6 +54,8 @@ export function convertWatchgodToInterface(watchgodTx) {
         }
     });
 
+    tx['timestamp'] = dateToTimestamp(watchgodTx.createdAt || 0)
+
     return tx;
 }
 
@@ -76,4 +78,8 @@ export function convertInterfaceToWatchgod(watchgodTx) {
     });
 
     return tx;
+}
+
+function dateToTimestamp(dateStr) {
+    return Math.round(Date.parse(dateStr) / 1000)
 }
