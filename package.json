@@ -1,6 +1,6 @@
 {
   "name": "openapi-watchgod-merger",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "merge open api and watchgod responses to get latest transaction status",
   "main": "src/index.js",
   "scripts": {
